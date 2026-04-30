@@ -32,12 +32,13 @@ This project builds an Elastic Net regression model on historical power consumpt
 
 The pipeline and cross-validation are built entirely with PySpark MLlib:
 
-1. Cast `Hour` to `DoubleType` via SQL transformer
-2. Binarize `Hour` (threshold = 6.5, i.e. night vs. day)
-3. One-hot encode `Month`
-4. PCA (2 components) on `Temperature`, `Humidity`, `Wind_Speed`, `General_Diffuse_Flows`, `Diffuse_Flows`
-5. Assemble final feature vector
-6. Fit Elastic Net regression via 5-fold `CrossValidator`
+1. Summarize data with Spark
+2. Cast `Hour` to `DoubleType` via SQL transformer
+3. Binarize `Hour` (threshold = 6.5, i.e. night vs. day)
+4. One-hot encode `Month`
+5. PCA (2 components) on `Temperature`, `Humidity`, `Wind_Speed`, `General_Diffuse_Flows`, `Diffuse_Flows`
+6. Assemble final feature vector
+7. Fit Elastic Net regression via 5-fold `CrossValidator`
 
 Tuning grid:
 - `regParam`: 0, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 1
