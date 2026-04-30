@@ -18,7 +18,7 @@ This project builds an Elastic Net regression model on historical power consumpt
 | File | Description |
 |------|-------------|
 | `final_project.ipynb` | Main Jupyter notebook: model fitting + streaming pipeline |
-| `produce_data.py` | Script that simulates a data stream by writing CSVs to a watched folder |
+| `stream_producer.py` | Script that simulates a data stream by writing CSVs to a watched folder |
 | `README.md` | This file |
 
 ## Data Sources
@@ -44,3 +44,40 @@ Tuning grid:
 - `elasticNetParam`: 0, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 1
 
 Response variable: `Power_Zone_3`
+
+## Streaming Pipeline (Part 2)
+
+1. Watch a local folder for incoming CSV files
+2. Apply the fitted model to each micro-batch to generate predictions
+3. Compute residuals (`label - prediction`)
+4. Join predictions back to the stream on `label`
+5. Write results to the console in **append** mode
+
+## How to Run
+
+### 1. Install dependencies
+
+```bash
+pip install pyspark pandas
+```
+
+### 2. Run the notebook
+
+Open `final_project.ipynb` in JupyterLab and run all cells. The streaming query will start watching for files.
+
+### 3. Simulate the stream
+
+In a separate terminal:
+
+```bash
+python stream_producer.py
+```
+
+This samples 5 random rows every 10 seconds (20 iterations) and writes them as CSV files to the watched folder. Output will appear in the notebook console.
+
+## Requirements
+
+- Python 3.8+
+- PySpark 3.x
+- pandas
+- JupyterLab or Jupyter Notebook
