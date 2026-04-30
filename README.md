@@ -2,8 +2,11 @@
 Final project for ST554: Analysis of Big Data at NC State University, Spring 2026
 
 Creator: Cole Hammett
+
 Purpose: Predicting power consumption (Zone 3) for Tetouan City using PySpark MLlib and Structured Streaming.
+
 Date: 30th of April, 2026
+
 Instructor: Justin Post
 
 ## Project Overview
